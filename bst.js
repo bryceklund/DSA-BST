@@ -88,3 +88,50 @@ class BinarySearchTree {
         return this.left._findMin()
     }
 }
+
+const BST = new BinarySearchTree()
+const nums = [3,1,4,6,9,2,5,7]
+const lets = ['E', 'A', 'S', 'Y', 'Q', 'U', 'E', 'S', 'T', 'I', 'O', 'N']
+nums.forEach(n => BST.insert(n, 1))
+//lets.forEach(l => BST.insert(l))
+//console.log(BST.key, BST.left.key, BST.right.key)
+function tree(t) {
+    if (!t) {
+        return 0
+    }
+    return tree(t.left) + t.value + tree(t.right)
+}
+
+function isBst(tree) {
+    if (!tree) {
+        return
+    }
+    if (tree.left < tree && tree.right > tree) {
+        return isBst()
+    }
+}
+
+function thirdLargest(tree) {
+    if (!tree.right) {
+        return tree.parent.key
+    }
+    return thirdLargest(tree.right)
+}
+
+//console.log(thirdLargest(BST))
+
+function isBalanced(tree) {
+    if (tree) {
+        if (tree.left && !tree.right) {
+            return false
+        } else if (tree.right && !tree.left) {
+            return false
+        } else {
+            for (const i of [tree.left, tree.right]) {
+                return isBalanced(i)
+            }
+        }
+    }
+    return true
+}
+console.log(isBalanced(BST))
